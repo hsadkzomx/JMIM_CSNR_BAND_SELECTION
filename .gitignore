@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.so
+*.dll
+._*
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+.env
+.venv/
+env/
+venv/
+.pytest_cache/
+.mypy_cache/
+.vscode/
+.idea/
+*.ipynb_checkpoints/
+
+# Large experiment artifacts
+outputs/
+runs/
+contrast_day_dark_lists/
+Command.txt
+
+# Model weights & checkpoints
+*.ckpt
+*.pt
+*.pth
+*.onnx
+
+# OS-specific clutter
+Thumbs.db
+.DS_Store
+desktop.ini

@@ -1,0 +1,100 @@
+data_root: "C:/Users/jiarn/Downloads/1/train"
+hsd_glob: "hsd/*.hsd"
+label_suffix: ".png"
+label_dir: "C:/Users/jiarn/Downloads/1/train/masks"
+
+evaluation:
+  project_code_root: "C:/Users/jiarn/Downloads/1/code/hsi_roi_sampling_fast/"
+  hsd_glob: "C:/Users/jiarn/Downloads/1/train/hsd/*.hsd"
+  rgb_glob: "C:/Users/jiarn/Downloads/1/original_dataset/V2_fixed_train_label/img/*.jpg"
+  fwhm_nm: 60.0
+  split_train: 0.7
+  split_val: 0.15
+  split_test: 0.15
+  ridge: 1.0e-6
+  seed: 42
+  out_dir: "C:/Users/jiarn/Downloads/1/code/hsi_roi_sampling_fast/hsi_roi_sampler_fast/scripts/2/test"
+
+paths:
+  project_root: "C:/Users/jiarn/Downloads/1"
+  rgb_src_dir: "C:/Users/jiarn/Downloads/1/original_dataset/V2_fixed_train_label/img"
+  masks_dir: "C:/Users/jiarn/Downloads/1/train/masks"
+  outputs_threeband_root: "C:/Users/jiarn/Downloads/1/code/hsi_roi_sampling_fast/hsi_roi_sampler_fast/scripts/2/outputs/threeband"
+  linear_mapped_root: "C:/Users/jiarn/Downloads/1/code/hsi_roi_sampling_fast/hsi_roi_sampler_fast/outputs/threeband/linear_mapped"
+  viz_root: "C:/Users/jiarn/Downloads/1/code/hsi_roi_sampling_fast/hsi_roi_sampler_fast/outputs/threeband/viz"
+
+variants:
+  threeband:
+    - "proposed_top3"
+    - "jmim_top3"
+    - "cmim_top3"
+    - "mrmr_diff_top3"
+    - "sim_lp_top3"
+    - "sim_osp_top3"
+  rgb_baseline: "rgb_baseline"
+
+band_selection:
+  num_bands: 128
+  edge_guard: 5
+  topk_jmim: 10
+  topk_csnr: 70
+  corr_threshold: "auto"
+  final_K: 3
+  tri_corr_cap: 0.9
+  random_seed: 42
+  max_topk: 80
+
+
+defaults:
+  seed: 42
+  num_workers: 8
+  img_size: 768
+  batch_size: 6
+  epochs: 300
+  lr: 6.0e-4
+  ridge: 1.0e-6
+  fwhm_nm: 60.0
+  split_train: 0.7
+  split_val: 0.15
+  split_test: 0.15
+  night_luma_thresh: 0.15
+  deterministic: true
+  tf32: true
+  channels_last: true
+
+band_sets:
+  jmim_top3: [33, 115, 6]
+  csnr_jmim_top10_intersect_top3: [115, 18, 77]
+  proposed_top3: [77, 115, 18]
+  mrmr_diff_top3: [34, 122, 5]
+  cmim_top3: [28, 120, 13]
+  sim_lp_top3: [15, 46, 75]
+  sim_osp_top3: [15, 46, 75]
+
+
+visible_band_idx: [5, 60]
+nir_band_idx: [70, 122]
+
+classes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+unlabeled_value: 255
+
+patch_size: 16
+min_spacing: 40
+erosion_radius: 3
+min_purity: 0.85
+min_component_area: 256
+
+intensity_bins: 3
+nir_ratio_bins: 2
+kmeans_per_class: 6
+scene_cap_ratio: 0.25
+
+jmim_pixels_per_class: 1500
+# corr: reuse the JMIM pixels
+corr_pixels_total: null
+csnr_patches_total: 5000
+
+jmim_oversample_factor: 1.6
+csnr_oversample_factor: 1.3
+
+random_seed: 42
